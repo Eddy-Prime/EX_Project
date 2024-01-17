@@ -1,0 +1,129 @@
+/* CSS is mobile-first geschreven */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Georgia, serif;
+  font-size: min(0.8rem + 0.3vw, 1.2rem);
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 1rem; /* Changed from 20rem to 1rem for smaller screens */
+}
+
+h1 {
+  margin: 1em 0;
+}
+
+h2 {
+  font-size: min(0.8rem + 1vw, 1.6rem);
+}
+
+.wrapper {
+  max-width: min(80ch, 85%);
+  margin-bottom: 3rem;
+}
+
+.quotes {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr); /* Changed from 3 to 1 for smaller screens */
+  column-gap: 1rem;
+  row-gap: 3rem;
+}
+
+.quotes article {
+  padding: 1em;
+  background-color: #ececec;
+  border: 2px solid #d0d0d0;
+  border-radius: 5px;
+}
+
+.quotes article p:last-of-type {
+  text-align: right;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2em;
+}
+
+#titel,
+#author {
+  width: 100%; /* Changed from 15em to 100% for smaller screens */
+}
+
+#language {
+  width: 100%; /* Changed from 3em to 100% for smaller screens */
+}
+
+button {
+  padding: 5px 1em;
+  margin-top: 2em;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+input[type="submit"] {
+  width: 100%; /* Changed from 10em to 100% for smaller screens */
+}
+
+input {
+  padding: 5px;
+  margin-bottom: 1.5em;
+}
+
+/* Media query for larger screens */
+@media (min-width: 768px) {
+  body {
+    padding: 50px 20rem;
+  }
+
+  .quotes {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  #titel,
+  #author,
+  #language {
+    width: 15em;
+  }
+
+  input[type="submit"] {
+    width: 10em;
+  }
+}
+  
+  /*@media (min-width: 500px) {
+    .quotes {
+      flex-direction: row;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+    }
+  
+    .quotes article {
+      max-width: calc(50% - 1.5em);
+      flex-basis: 45%;
+    }
+  }
+  
+  @media (min-width: 800px) {
+  
+    .quotes article {
+      max-width: calc(33% - 3em);
+      flex-basis: 33%;
+    }
+  
+    h2 {
+      font-size: min(0.7rem + 0.7vw, 1.4em);
+    }
+  }*/
+
+  

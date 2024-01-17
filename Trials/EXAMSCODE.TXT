@@ -1,0 +1,150 @@
+// Array of objects containing quotes in different languages
+const citaten = [
+  // Each object represents a quote with title, text, author, and language
+  { titel: 'foolish', citaat: 'Stay hungry, stay foolish.', auteur: 'Steve Jobs', taal: 'en' },
+  // ... (more quotes)
+];
+
+// Function to print quotes to the HTML page
+const printCitaten = (arr_citaten, filterFunction) => {
+  // Select the HTML element with class "citaten"
+  sectie_citaten = document.querySelector(".citaten");
+  // Clear the content inside the selected element
+  sectie_citaten.innerHTML = "";
+
+  // If a filter function is provided, filter the quotes array
+  if (filterFunction) {
+    arr_citaten = arr_citaten.filter(filterFunction);
+  }
+
+  // Iterate through the filtered or original quotes array and create HTML elements for each quote
+  arr_citaten.forEach((citaat) => {
+    const artikel = maakCitaatArtikel(citaat);
+    // Append the created HTML element to the selected section
+    sectie_citaten.appendChild(artikel);
+  });
+};
+
+// Function to create HTML elements for a single quote
+
+const maakCitaatArtikel = (citaat) => {
+  // Create HTML elements for title, text, and author of the quote
+  const citaat_artikel = document.createElement("article");
+  const h2 = document.createElement("h2");
+  const p_tekst = document.createElement("p");
+  const p_auteur = document.createElement("p");
+
+  // Set the content of the created elements based on the quote object
+  h2.innerHTML = citaat.titel;
+  p_tekst.innerHTML = citaat.citaat;
+  p_auteur.innerHTML = "&hyphen; " + citaat.auteur;
+
+  // Append the created elements to the article element
+  citaat_artikel.appendChild(h2);
+  citaat_artikel.appendChild(p_tekst);
+  citaat_artikel.appendChild(p_auteur);
+
+  // Return the created article element
+  return citaat_artikel;
+};
+
+// Initial call to print quotes to the HTML page without any filtering
+printCitaten(citaten);
+
+// Select the button with id "langeCitaten"
+const knop = document.querySelector("#langeCitaten");
+
+// Add an event listener to the button to filter and print quotes with text length greater than 50 characters
+knop.addEventListener("click", () => {
+  printCitaten(citaten, filterFunction = (citaat) => citaat.citaat.length > 50);
+});
+
+// Function to add a new quote to the array and update the HTML page
+const voegCitaatToe = () => {
+  // Get values from input fields
+  const titel = document.getElementById("titel").value;
+  const citaat = document.getElementById("citaat").value;
+  const auteur = document.getElementById("auteur").value;
+  const taal = document.getElementById("taal").value;
+
+  // Validate input fields
+  // ...
+
+  // Add the new quote to the array
+  citaten.push({ titel, citaat, auteur, taal });
+
+  // Clear feedback and provide success message
+  clearFeedback();
+  addFeedback("Nieuw citaat toegevoegd.");
+
+  // Clear input fields
+  document.getElementById("titel").value = "";
+  document.getElementById("citaat").value = "";
+  document.getElementById("auteur").value = "";
+  document.getElementById("taal").value = "";
+
+  // Update the HTML page with the new quotes
+  printCitaten(citaten);
+};
+
+// Function to clear feedback messages
+const clearFeedback = () => {
+  const feedback = document.querySelector("#feedback");
+  feedback.innerHTML = "";
+};
+
+// Function to add a feedback message to the HTML page
+const addFeedback = (melding) => {
+  const feedback_div = document.querySelector("#feedback");
+  const feedback = document.createElement("p");
+
+  feedback.innerHTML = melding;
+  feedback_div.appendChild(feedback);
+};
+
+// Add event listener to the form to prevent default form submission and call voegCitaatToe function
+document.querySelector("form").addEventListener("submit", (event) => {
+  event.preventDefault();
+  voegCitaatToe();
+});
+
+
+
+
+const Addquote = () => {
+    const title = document.getElementById("title").value;
+    const quote = document.getElementById("quote").value;
+    const author = document.getElementById("author").value;
+    const language = document.getElementById("language").value;
+
+    if (!title || !quote || !author || !language) {
+        clearFeedback();
+        addFeedback("Please fill all the details");
+        return;
+    }
+
+    if (quote.length < 10) {
+        clearFeedback();
+        addFeedback("Quote must be at least 10 characters long");
+        return;
+    }
+
+    quotes.push({ title, quote, author, language });
+    clearFeedback();
+    addFeedback("Quote added successfully");
+    document.getElementById("title").value = "";
+    document.getElementById("quote").value = "";
+    document.getElementById("author").value = "";
+    document.getElementById("language").value = "";
+    printQuotes(quotes);
+        
+};
+
+const clearFeedback = () => {
+    const feedback_div = document.getElementById("feedback");
+    const feedback = document.createElement("p");
+
+    feedback.innerHTML = melding;
+    feedback_div.appendChild(feedback);
+};
+
